@@ -1247,6 +1247,8 @@ bool UrdfParser::parseJoint(UrdfJoint& joint, TiXmlElement *config, ErrorLogger*
 	  joint.m_type = URDFContinuousJoint;
   else if (type_str == "prismatic")
 	  joint.m_type = URDFPrismaticJoint;
+  else if (type_str == "spherical")
+	  joint.m_type = URDFSphericalJoint;
   else if (type_str == "fixed")
 	  joint.m_type = URDFFixedJoint;
   else
@@ -1260,7 +1262,7 @@ bool UrdfParser::parseJoint(UrdfJoint& joint, TiXmlElement *config, ErrorLogger*
 		
     if (m_parseSDF)
     {
-        if (joint.m_type != URDFFloatingJoint && joint.m_type != URDFFixedJoint)
+        if (joint.m_type != URDFFloatingJoint && joint.m_type != URDFFixedJoint && joint.m_type != URDFSphericalJoint)
         {
             // axis
             TiXmlElement *axis_xml = config->FirstChildElement("axis");
@@ -1324,7 +1326,7 @@ bool UrdfParser::parseJoint(UrdfJoint& joint, TiXmlElement *config, ErrorLogger*
     else
     {
         // Get Joint Axis
-        if (joint.m_type != URDFFloatingJoint && joint.m_type != URDFFixedJoint)
+        if (joint.m_type != URDFFloatingJoint && joint.m_type != URDFFixedJoint && joint.m_type != URDFSphericalJoint)
         {
             // axis
             TiXmlElement *axis_xml = config->FirstChildElement("axis");

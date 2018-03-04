@@ -486,6 +486,26 @@ void ConvertURDF2BulletInternal(
                     }
                     break;
                 }
+                case URDFSphericalJoint:
+                {
+					creation.addLinkMapping(urdfLinkIndex,mbLinkIndex);
+
+                    if (createMultiBody)
+                    {
+                        cache.m_bulletMultiBody->setupSpherical(mbLinkIndex, mass, localInertiaDiagonal, mbParentIndex,
+                                                                   parentRotToThis, offsetInA.getOrigin(),//parent2joint.getOrigin(),
+                                                                   -offsetInB.getOrigin(),
+                                                                   disableParentCollision);
+
+                        //printf("joint lower limit=%d, upper limit = %f\n", jointLowerLimit, jointUpperLimit);
+
+                    } else
+                    {
+			b3Printf("Error: unsupported spherical joint  type in URDF (%d)\n", jointType);
+						btAssert(0);
+                    }
+                    break;
+                }
                 default:
                 {
                     //b3Printf("Error: unsupported joint type in URDF (%d)\n", jointType);
