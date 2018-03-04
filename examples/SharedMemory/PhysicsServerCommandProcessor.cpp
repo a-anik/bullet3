@@ -2029,7 +2029,12 @@ struct ProgrammaticUrdfInterface : public URDFImporterInterface
 			jointType = URDFFixedJoint;
 			break;
 		}
-		//case	eSphericalType:
+		case	eSphericalType:
+		{
+			isValid = true;
+			jointType = URDFSphericalJoint;
+			break;
+		}
 		//case	ePlanarType:
 		//case	eFixedType:
 		//case ePoint2PointType:
